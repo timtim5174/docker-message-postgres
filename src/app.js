@@ -49,9 +49,9 @@ var express_1 = __importDefault(require("express"));
 var bodyParser = __importStar(require("body-parser"));
 var message_1 = __importDefault(require("./route/message"));
 var pg_1 = require("pg");
-var port = 3000;
+var port = 8080;
 var user = 'postgres';
-var host = '192.168.99.100';
+var host = 'localhost';
 var database = 'postgres';
 var password = 'secret';
 var dbPort = 5432;
@@ -96,7 +96,7 @@ function startServer(app) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             app.get('/', function (req, res) {
-                res.send('Hello from AWS express server');
+                res.send("Hello from express server");
             });
             app.listen(port, function () {
                 console.log("Server is running on port " + port + " ...");
