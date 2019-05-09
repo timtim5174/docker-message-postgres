@@ -50,26 +50,28 @@ var bodyParser = __importStar(require("body-parser"));
 var message_1 = __importDefault(require("./route/message"));
 var pg_1 = require("pg");
 var port = 8080;
-var user = 'postgres';
-var host = 'localhost';
 var database = 'postgres';
-var password = 'secret';
-var dbPort = 5432;
+var user = process.env.RDS_USERNAME;
+var host = process.env.RDS_HOSTNAME;
+var password = process.env.RDS_PASSWORD;
+var dbPort = process.env.RDS_PORT;
 var connectionString = "postgresql://" + user + ":" + password + "@" + host + ":" + dbPort + "/" + database;
 function start() {
     return __awaiter(this, void 0, void 0, function () {
-        var app;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var app, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     app = express_1.default();
                     app.use(bodyParser.json());
                     app.use('/message', message_1.default);
-                    //app.locals.db = await connectToPostgres();
-                    return [4 /*yield*/, startServer(app)];
+                    _a = app.locals;
+                    return [4 /*yield*/, connectToPostgres()];
                 case 1:
-                    //app.locals.db = await connectToPostgres();
-                    _a.sent();
+                    _a.db = _b.sent();
+                    return [4 /*yield*/, startServer(app)];
+                case 2:
+                    _b.sent();
                     return [2 /*return*/];
             }
         });

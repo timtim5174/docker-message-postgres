@@ -1,15 +1,22 @@
 import express from 'express';
+import { Client } from 'pg';
 
 const router = express.Router();
 
 router.post('/', (req,res) => {
-    console.log('POST');
-    res.send('POST: /message');
+    const db: Client = res.app.locals.db;
+    db.query(`INSERT INTO messages(message, created_on) VALUES('${req.body.message}', '${new Date().toISOString()}');`)
+    .then(data => {
+        res.send(`Insert ${req.body.message} into database`);
+    });
 });
 
 router.get('/', (req,res)=> {
-    console.log('GET');
-    res.send('GET: /message');
+    const db: Client = res.app.locals.db;
+    db.query('Select * from messages')
+    .then(data => {
+        res.send(data.rows)
+    });
 });
 
 export default router; 

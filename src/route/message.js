@@ -6,11 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var router = express_1.default.Router();
 router.post('/', function (req, res) {
-    console.log('POST');
-    res.send('POST: /message');
+    var db = res.app.locals.db;
+    db.query("INSERT INTO messages(message, created_on) VALUES('" + req.body.message + "', '" + new Date().toISOString() + "');")
+        .then(function (data) {
+        res.send("Insert " + req.body.message + " into database");
+    });
 });
 router.get('/', function (req, res) {
-    console.log('GET');
-    res.send('GET: /message');
+    var db = res.app.locals.db;
+    db.query('Select * from messages')
+        .then(function (data) {
+        res.send(data.rows);
+    });
 });
 exports.default = router;
