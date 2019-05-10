@@ -12,7 +12,7 @@ deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "docker-message-postgres"
-  env: "DockerMessagePostgres-env"
+  env: "DockerMessagePostgres-env-1"
   bucket_name: "elasticbeanstalk-us-east-2-561864422029"
   bucket_path: "docker-message-postgres"
   on:

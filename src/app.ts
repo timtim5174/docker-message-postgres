@@ -16,7 +16,7 @@ async function start(){
     app.use(bodyParser.json());
     app.use('/message', message);
 
-    //app.locals.db = await connectToPostgres();
+    app.locals.db = await connectToPostgres();
     await startServer(app);
 }
 
