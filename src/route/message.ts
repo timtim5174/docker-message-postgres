@@ -16,7 +16,7 @@ router.get('/', (req,res)=> {
     db.query('Select * from messages')
     .then(data => {
         res.send(data.rows)
-    });
+    }).catch(err => res.send(err));
 });
 
 export default router; 
