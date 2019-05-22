@@ -48,14 +48,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var bodyParser = __importStar(require("body-parser"));
 var message_1 = __importDefault(require("./route/message"));
-var pg_1 = require("pg");
+require("reflect-metadata");
+var typeorm_1 = require("typeorm");
+var message_2 = require("./models/message");
 var port = 8080;
 var database = process.env.RDS_DB_NAME || 'postgres';
 var user = process.env.RDS_USERNAME || 'postgres';
 var host = process.env.RDS_HOSTNAME || 'localhost';
 var password = process.env.RDS_PASSWORD || 'postgres';
-var dbPort = process.env.RDS_PORT || 5432;
-var connectionString = "postgresql://" + user + ":" + password + "@" + host + ":" + dbPort + "/" + database;
+var dbPort = process.env.RDS_PORT ? parseInt(process.env.RDS_PORT) : 5432;
 function start() {
     return __awaiter(this, void 0, void 0, function () {
         var app, _a;
@@ -78,19 +79,36 @@ function start() {
     });
 }
 function connectToPostgres() {
-    return new Promise(function (resolve) {
-        var client = new pg_1.Client({
-            connectionString: connectionString
-        });
-        client.connect()
-            .then(function () {
-            console.log('Connection to postgres was succesful');
-            resolve(client);
-        })
-            .catch(function (err) {
-            console.log('Could not connect to postgres');
-            console.log(err);
-            process.exit(-1);
+    return __awaiter(this, void 0, void 0, function () {
+        var connection, err_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, typeorm_1.createConnection({
+                            type: 'postgres',
+                            host: host,
+                            port: dbPort,
+                            username: user,
+                            password: password,
+                            database: database,
+                            entities: [message_2.Message]
+                        })];
+                case 1:
+                    connection = _a.sent();
+                    return [4 /*yield*/, connection.synchronize()];
+                case 2:
+                    _a.sent();
+                    console.log('Connection to postgres was succesful');
+                    return [2 /*return*/, connection];
+                case 3:
+                    err_1 = _a.sent();
+                    console.log('Could not connect to postgres');
+                    console.log(err_1);
+                    process.exit(-1);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
         });
     });
 }

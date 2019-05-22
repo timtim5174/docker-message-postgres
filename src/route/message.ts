@@ -1,22 +1,23 @@
 import express from 'express';
-import { Client } from 'pg';
+import { EntityManager } from "typeorm";
+import { Message } from '../models/message';
 
 const router = express.Router();
 
-router.post('/', (req,res) => {
-    const db: Client = res.app.locals.db;
-    db.query(`INSERT INTO messages(message, created_on) VALUES('${req.body.message}', '${new Date().toISOString()}');`)
-    .then(data => {
-        res.send(`Insert ${req.body.message} into database`);
-    });
+router.post('/', async (req,res) => {
+    const repository: EntityManager = res.app.locals.db.manager;
+    const message: Message = new Message();
+    message.message = req.body.message;
+    message.createdOn = new Date().toISOString();
+    
+    await repository.save(message);
+    res.send(`Insert ${req.body.message} into database`);
 });
 
-router.get('/', (req,res)=> {
-    const db: Client = res.app.locals.db;
-    db.query('Select * from messages')
-    .then(data => {
-        res.send(data.rows)
-    }).catch(err => res.send(err));
+router.get('/', async (req,res)=> {
+    const repository: EntityManager = res.app.locals.db.manager;
+    const messages = await repository.find(Message);
+    res.send(JSON.stringify(messages));
 });
 
 export default router; 
