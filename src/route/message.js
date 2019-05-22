@@ -17,6 +17,6 @@ router.get('/', function (req, res) {
     db.query('Select * from messages')
         .then(function (data) {
         res.send(data.rows);
-    });
+    }).catch(function (err) { return res.send(err); });
 });
 exports.default = router;

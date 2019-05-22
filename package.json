@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "tsc && node ./src/app.js",
-    "docker": "docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=secret -d -p 5432:5432 postgres"
+    "docker": "docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres"
   },
   "keywords": [],
   "author": "",

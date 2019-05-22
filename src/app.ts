@@ -4,11 +4,11 @@ import message from './route/message';
 import { Client } from 'pg';
 
 const port = 8080;
-const database = 'postgres';
-const user = process.env.RDS_USERNAME;
-const host = process.env.RDS_HOSTNAME;
-const password = process.env.RDS_PASSWORD;
-const dbPort = process.env.RDS_PORT;
+const database = process.env.RDS_DB_NAME || 'postgres';
+const user = process.env.RDS_USERNAME || 'postgres';
+const host = process.env.RDS_HOSTNAME || 'localhost';
+const password = process.env.RDS_PASSWORD || 'postgres';
+const dbPort = process.env.RDS_PORT || 5432;
 const connectionString = `postgresql://${user}:${password}@${host}:${dbPort}/${database}`;
 
 async function start(){

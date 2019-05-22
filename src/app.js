@@ -50,11 +50,11 @@ var bodyParser = __importStar(require("body-parser"));
 var message_1 = __importDefault(require("./route/message"));
 var pg_1 = require("pg");
 var port = 8080;
-var database = 'postgres';
-var user = process.env.RDS_USERNAME;
-var host = process.env.RDS_HOSTNAME;
-var password = process.env.RDS_PASSWORD;
-var dbPort = process.env.RDS_PORT;
+var database = process.env.RDS_DB_NAME || 'postgres';
+var user = process.env.RDS_USERNAME || 'postgres';
+var host = process.env.RDS_HOSTNAME || 'localhost';
+var password = process.env.RDS_PASSWORD || 'postgres';
+var dbPort = process.env.RDS_PORT || 5432;
 var connectionString = "postgresql://" + user + ":" + password + "@" + host + ":" + dbPort + "/" + database;
 function start() {
     return __awaiter(this, void 0, void 0, function () {
