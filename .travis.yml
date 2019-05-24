@@ -8,14 +8,14 @@ before_install:
 script:
   - docker run tsa/docker-message-postgres npm run test
 
-deploy: 
-  provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "docker-message-postgres"
-  env: "DockerMessagePostgres-env-1"
-  bucket_name: "elasticbeanstalk-us-east-2-561864422029"
-  bucket_path: "docker-message-postgres"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+#deploy: 
+#  provider: elasticbeanstalk
+#  region: "us-east-2"
+#  app: "docker-message-postgres"
+#  env: "DockerMessagePostgres-env-1"
+#  bucket_name: "elasticbeanstalk-us-east-2-561864422029"
+#  bucket_path: "docker-message-postgres"
+#  on:
+#    branch: master
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key: $AWS_SECRET_KEY

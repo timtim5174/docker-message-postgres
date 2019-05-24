@@ -1,0 +1,28 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+  api: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - PORT=3000
+      - RDS_DB_NAME=postgres
+      - RDS_USERNAME=postgres
+      - RDS_HOSTNAME=postgres
+      - RDS_PASSWORD=postgres
+      - RDS_PORT=5432
+    depends_on:
+      - postgres
+    command: npm run dev:watch

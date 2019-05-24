@@ -51,11 +51,11 @@ var message_1 = __importDefault(require("./route/message"));
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
 var message_2 = require("./models/message");
-var port = 8080;
-var database = process.env.RDS_DB_NAME || 'postgres';
-var user = process.env.RDS_USERNAME || 'postgres';
-var host = process.env.RDS_HOSTNAME || 'localhost';
-var password = process.env.RDS_PASSWORD || 'postgres';
+var port = process.env.PORT;
+var database = process.env.RDS_DB_NAME;
+var user = process.env.RDS_USERNAME;
+var host = process.env.RDS_HOSTNAME;
+var password = process.env.RDS_PASSWORD;
 var dbPort = process.env.RDS_PORT ? parseInt(process.env.RDS_PORT) : 5432;
 function start() {
     return __awaiter(this, void 0, void 0, function () {

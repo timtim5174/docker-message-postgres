@@ -5,11 +5,11 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { Message } from './models/message';
 
-const port = 8080;
-const database = process.env.RDS_DB_NAME || 'postgres';
-const user = process.env.RDS_USERNAME || 'postgres';
-const host = process.env.RDS_HOSTNAME || 'localhost';
-const password = process.env.RDS_PASSWORD || 'postgres';
+const port = process.env.PORT || 3000;
+const database = process.env.RDS_DB_NAME;
+const user = process.env.RDS_USERNAME;
+const host = process.env.RDS_HOSTNAME;
+const password = process.env.RDS_PASSWORD;
 const dbPort = process.env.RDS_PORT ? parseInt(process.env.RDS_PORT) : 5432;
 
 async function start(){

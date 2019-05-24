@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "tsc && node ./src/app.js",
-    "docker": "docker run --rm --name docker-postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres"
+    "dev": "docker-compose up",
+    "dev:watch": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,8 @@
     "@types/jest": "^24.0.12",
     "@types/node": "^11.11.4",
     "@types/pg": "^7.4.14",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.0"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
