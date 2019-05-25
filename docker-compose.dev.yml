@@ -26,3 +26,5 @@ services:
     depends_on:
       - postgres
     command: npm run dev:watch
+  swagger:
+    image: 'swaggerapi/swagger-ui'
