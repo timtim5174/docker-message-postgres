@@ -51,7 +51,7 @@ var message_1 = __importDefault(require("./route/message"));
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
 var message_2 = require("./models/message");
-var port = process.env.PORT;
+var port = process.env.PORT || 3000;
 var database = process.env.RDS_DB_NAME;
 var user = process.env.RDS_USERNAME;
 var host = process.env.RDS_HOSTNAME;

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "tsc && node ./src/app.js",
-    "dev": "docker-compose up",
+    "dev": "docker-compose -f docker-compose.dev.yml up",
     "dev:watch": "nodemon"
   },
   "keywords": [],
