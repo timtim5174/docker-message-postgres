@@ -1,0 +1,84 @@
+{
+    "swagger":"2.0",
+    "info":{
+       "description":"This a simple express server with postgres.",
+       "version":"1.0.0",
+       "title":"Swagger docker-message-postgres",
+       "termsOfService":"http://swagger.io/terms/",
+       "contact":{
+          "email":"apiteam@swagger.io"
+       },
+       "license":{
+          "name":"Apache 2.0",
+          "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+       }
+    },
+    "host":"locahost:3000",
+    "basePath":"/",
+    "tags":[
+       {
+          "name":"message",
+          "description":"Everything about your messages",
+          "externalDocs":{
+             "description":"Find out more",
+             "url":"http://swagger.io"
+          }
+       }
+    ],
+    "schemes":[
+       "http"
+    ],
+    "paths": {
+       "/message": {
+          "get": {
+             "tags": ["message"],
+             "summary": "Finds all messages",
+             "produces": ["application/json"],
+             "responses": {
+                "200": {
+                   "description": "successful",
+                   "schema": {
+                      "items": {
+                         "$ref": "#/definitions/Message"
+                      }
+                   }
+                }
+             }
+          },
+          "post": {
+            "tags": ["message"],
+            "summary": "Add a new message to the database",
+            "consumes": ["application/json"],
+            "produces": ["application/json"],
+            "parameters": [{
+               "in": "body",
+               "name": "body",
+               "description": "Message object that needs to be added",
+               "required": true,
+               "schema": { "$ref": "#/definitions/Message"}
+            }],
+            "responses": {
+               "200": {
+                  "description": "successful",
+                  "schema": {
+                     "type": "object",
+                     "item": {
+                        "$ref": "#/definitions/Message"
+                     }
+                  }
+               }
+            }
+          }
+       }
+    },
+    "definitions": {
+       "Message": {
+          "type": "object",
+          "properties": {
+             "id": { "type": "integer" },
+             "message": { "type": "string" },
+             "createdOn": { "type": "string" }
+          }
+       }
+    }
+ }

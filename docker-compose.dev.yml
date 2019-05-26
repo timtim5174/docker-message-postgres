@@ -2,6 +2,7 @@ version: '3'
 services:
   postgres:
     image: 'postgres:latest'
+    container_name: 'postgres'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -9,6 +10,7 @@ services:
     ports:
       - "5432:5432"
   api: 
+    container_name: 'api'
     build: 
       context: .
       dockerfile: Dockerfile.dev
@@ -26,5 +28,12 @@ services:
     depends_on:
       - postgres
     command: npm run dev:watch
-  swagger:
+  swagger-ui:
     image: 'swaggerapi/swagger-ui'
+    container_name: "swagger-ui"
+    ports:
+      - "3001:8080"
+    volumes:
+      - ./src/swagger.json:/tmp/swagger.json
+    environment:
+      - SWAGGER_JSON=/tmp/swagger.json

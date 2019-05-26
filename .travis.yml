@@ -3,10 +3,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t tsa/docker-message-postgres -f Dockerfile.dev .
+  - docker build -t tsa/docker-message-postgres-test -f Dockerfile.dev .
 
 script:
-  - docker run tsa/docker-message-postgres npm run test
+  - docker run tsa/docker-message-postgres-test npm run test
 
 #deploy: 
 #  provider: elasticbeanstalk
